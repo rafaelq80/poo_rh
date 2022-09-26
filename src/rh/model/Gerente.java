@@ -1,6 +1,6 @@
 package rh.model;
 
-public class Gerente extends Funcionario{
+public class Gerente extends Colaborador{
 	
 	private float bonificacao;
 

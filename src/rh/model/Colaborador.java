@@ -1,6 +1,6 @@
 package rh.model;
 
-public abstract class Funcionario {
+public abstract class Colaborador {
 	
 	private int id;
 	private String nome;
@@ -8,7 +8,7 @@ public abstract class Funcionario {
 	private int cargo;
 	private float salario;
 	
-	public Funcionario(int id, String nome, String email, int cargo, float salario) {
+	public Colaborador(int id, String nome, String email, int cargo, float salario) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -16,7 +16,7 @@ public abstract class Funcionario {
 		this.salario = salario;
 	}
 	
-	public Funcionario() { }
+	public Colaborador() { }
 
 	public int getId() {
 		return id;

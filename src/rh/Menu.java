@@ -3,7 +3,7 @@ package rh;
 import java.io.IOException;
 import java.util.Scanner;
 
-import rh.controller.FuncionarioController;
+import rh.controller.ColaboradorController;
 import rh.model.Gerente;
 import rh.model.Vendedor;
 import rh.util.Cores;
@@ -14,21 +14,21 @@ public class Menu {
 		
 		Scanner leia = new Scanner(System.in);
 		
-		FuncionarioController funcionarios = new FuncionarioController();
+		ColaboradorController colaboradores = new ColaboradorController();
 		
 		System.out.println("\nCriar Funcionários\n");
 		
 		Gerente funcionario1 = new Gerente(0, "Julia Andrews", 
 				"julia@email.com.br", 1, 7000.0f, 1000.0f);
-		funcionarios.cadastrar(funcionario1);
+		colaboradores.cadastrar(funcionario1);
 		
 		Vendedor funcionario2 = new Vendedor(0, "Maria Flores", 
 				"maria@email.com.br", 2, 2000.0f, 5.0f);
-		funcionarios.cadastrar(funcionario2);
+		colaboradores.cadastrar(funcionario2);
 		
 		Vendedor funcionario3 = new Vendedor(0, "Paulo Antunes", 
 				"paulo@email.com.br", 2, 2000.0f, 5.0f);
-		funcionarios.cadastrar(funcionario3);
+		colaboradores.cadastrar(funcionario3);
 				
 		int opcao, id, cargo = 0;
 		String nome, email = "";
@@ -41,18 +41,18 @@ public class Menu {
 				System.out.println(Cores.TEXT_WHITE_BOLD + Cores.ANSI_BLUE_BACKGROUND 
 													+ "                                                                     ");
 				System.out.println(Cores.TEXT_WHITE_BOLD + Cores.ANSI_BLUE_BACKGROUND
-													+ "                      CADASTRO DE FUNCIONÁRIOS                       ");
+													+ "                      CADASTRO DE COLABORADORES                      ");
 				System.out.println(Cores.TEXT_WHITE_BOLD + Cores.ANSI_BLUE_BACKGROUND 
 													+ "                                                                     ");
 				System.out.println(Cores.TEXT_RESET + Cores.TEXT_GREEN
 													+ "*********************************************************************");
 				System.out.println(Cores.TEXT_GREEN + Cores.ANSI_BLUE_BACKGROUND
 														 + "                                                                     ");
-				System.out.println(Cores.TEXT_GREEN_BOLD + "            1 - Inserir novo funcionário                             ");
-				System.out.println(Cores.TEXT_GREEN_BOLD + "            2 - Ver os dados de todos os funcionários                ");
-				System.out.println(Cores.TEXT_GREEN_BOLD + "            3 - Ver os dados de um funcionário                       ");
-				System.out.println(Cores.TEXT_GREEN_BOLD + "            4 - Atualizar os dados de um funcionário                 ");
-				System.out.println(Cores.TEXT_GREEN_BOLD + "            5 - Deletar um funcionário                               ");
+				System.out.println(Cores.TEXT_GREEN_BOLD + "            1 - Inserir novo Colaborador                             ");
+				System.out.println(Cores.TEXT_GREEN_BOLD + "            2 - Ver os dados de todos os Colaboradores               ");
+				System.out.println(Cores.TEXT_GREEN_BOLD + "            3 - Ver os dados de um Colaborador                       ");
+				System.out.println(Cores.TEXT_GREEN_BOLD + "            4 - Atualizar os dados de um Colaborador                 ");
+				System.out.println(Cores.TEXT_GREEN_BOLD + "            5 - Deletar um Colaborador                               ");
 				System.out.println(Cores.TEXT_GREEN_BOLD + "            6 - Calcular o novo salário                              ");
 				System.out.println(Cores.TEXT_GREEN_BOLD + "            7 - Sair                                                 ");
 				System.out.println(Cores.TEXT_GREEN_BOLD + "                                                                     " 
@@ -80,7 +80,7 @@ public class Menu {
 					email = leia.nextLine();
 										
 					do {
-						System.out.println("Digite o Cargo do Funcionário: ");
+						System.out.println("Digite o Cargo do Funcionário (1-Gerente/2-vendedor): ");
 						cargo = leia.nextInt();
 					}while(cargo < 1 && cargo > 2);
 						
@@ -91,13 +91,13 @@ public class Menu {
 						System.out.println("Digite o valor da Bonificação do Gerente (R$): ");
 						bonificacao = leia.nextFloat();
 						
-						funcionarios.cadastrar(new Gerente(0, nome, email, cargo, salario, bonificacao));
+						colaboradores.cadastrar(new Gerente(0, nome, email, cargo, salario, bonificacao));
 						
 					}else {
 						System.out.println("Digite o percentual da comissão (%): ");
 						comissao = leia.nextInt();
 						
-						funcionarios.cadastrar(new Vendedor(0, nome, email, cargo, salario, comissao));
+						colaboradores.cadastrar(new Vendedor(0, nome, email, cargo, salario, comissao));
 						
 					}
 										
@@ -107,7 +107,7 @@ public class Menu {
 				case 2:
 					System.out.println(Cores.TEXT_WHITE + "Visualizar os dados de todos os funcionários\n\n");
 					
-					funcionarios.listarTodos();
+					colaboradores.listarTodos();
 					
 					keyPress();
 					
@@ -119,7 +119,7 @@ public class Menu {
 					System.out.println("Digite o id do funcionário: ");
 					id = leia.nextInt();
 					
-					funcionarios.buscarPorId(id);
+					colaboradores.buscarPorId(id);
 					
 					keyPress();
 	
@@ -130,7 +130,7 @@ public class Menu {
 					System.out.println("Digite o id do funcionário: ");
 					id = leia.nextInt();
 					
-					if (funcionarios.procurarPorId(id) != null) {
+					if (colaboradores.procurarPorId(id) != null) {
 						
 						System.out.println("Digite o novo Nome do Funcionário: ");
 						leia.skip("\\R?");
@@ -140,7 +140,7 @@ public class Menu {
 						email = leia.nextLine();
 											
 						do {
-							System.out.println("Digite o novo Cargo do Funcionário: ");
+							System.out.println("Digite o novo Cargo do Funcionário (1-Gerente/2-vendedor): ");
 							cargo = leia.nextInt();
 						}while(cargo < 1 && cargo > 2);
 							
@@ -151,13 +151,13 @@ public class Menu {
 							System.out.println("Digite o valor da nova Bonificação do Gerente (R$): ");
 							bonificacao = leia.nextFloat();
 							
-							funcionarios.atualizar(new Gerente(id, nome, email, cargo, salario, bonificacao));
+							colaboradores.atualizar(new Gerente(id, nome, email, cargo, salario, bonificacao));
 							
 						}else {
 							System.out.println("Digite o percentual da nova comissão (%): ");
 							comissao = leia.nextInt();
 							
-							funcionarios.cadastrar(new Vendedor(id, nome, email, cargo, salario, comissao));
+							colaboradores.cadastrar(new Vendedor(id, nome, email, cargo, salario, comissao));
 							
 						}
 						
@@ -175,7 +175,7 @@ public class Menu {
 					System.out.println("Digite o id do funcionário: ");
 					id = leia.nextInt();
 					
-					funcionarios.deletar(id);
+					colaboradores.deletar(id);
 					
 					keyPress();
 					
@@ -189,7 +189,7 @@ public class Menu {
 					System.out.println("Digite o percentual do aumento do Funcionário: ");
 					percentual = leia.nextFloat();
 					
-					funcionarios.calcularAumento(id, percentual);
+					colaboradores.calcularAumento(id, percentual);
 					
 					keyPress();
 					

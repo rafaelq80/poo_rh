@@ -1,6 +1,6 @@
 package rh.model;
 
-public class Vendedor extends Funcionario{
+public class Vendedor extends Colaborador{
 	
 	private float comissao;
 	
